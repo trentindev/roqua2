@@ -17,17 +17,17 @@
 	</head>
 
 	<body class="d-flex flex-column">
-		<header>header</header>
-		<div class="flex-fill d-flex flex-row-nowrap">
-			<div class="content d-flex flex-row-nowrap">
-				<div class="sidebar">sidebar</div>
-				<div class="flex-fill">
-					{% block body %}HELLO
-					{% endblock %}
-				</div>
-			</div>
-		</div>
-		<footer>footer</footer>
-	</body>
+    {{ include('partials/_header.html.twig') }}
+    <div class="flex-fill d-flex flex-row-nowrap">
+      <div class="content d-flex flex-row-nowrap">
+        {{ include('partials/_sidebar.html.twig') }}
+        <div class="flex-fill">
+          {% block body %}HELLO
+          {% endblock %}
+        </div>
+      </div>
+    </div>
+    {{ include('partials/_footer.html.twig') }}
+  </body>
   
 </html>

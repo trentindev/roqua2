@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>
+			{% block title %}Welcome!
+			{% endblock %}
+		</title>
+
+		<script defer src="{{ asset('js/index.js') }}"></script>
+		<link rel="stylesheet" href="{{ asset('css/style.css') }}">
+
+	</head>
+	<body>
+		{% block body %}{% endblock %}
+	</body>
+</html>

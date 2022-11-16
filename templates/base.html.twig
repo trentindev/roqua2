@@ -15,19 +15,17 @@
 		<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
 
 	</head>
-
 	<body class="d-flex flex-column">
-    {{ include('partials/_header.html.twig') }}
-    <div class="flex-fill d-flex flex-row-nowrap">
-      <div class="content d-flex flex-row-nowrap">
-        {{ include('partials/_sidebar.html.twig') }}
-        <div class="flex-fill">
-          {% block body %}HELLO
-          {% endblock %}
-        </div>
-      </div>
-    </div>
-    {{ include('partials/_footer.html.twig') }}
-  </body>
-  
+		{{ include("partials/_header.html.twig") }}
+		<div class="flex-fill d-flex flex-row-nowrap justify-content-center">
+			<div class="content d-flex flex-row-nowrap flex-fill py-50">			
+				{{ include("partials/_sidebar.html.twig") }}
+				<div class="flex-fill">
+					{% block body %}Contenu
+					{% endblock %}
+				</div>
+			</div>
+		</div>
+		{{ include("partials/_footer.html.twig") }}
+	</body>
 </html>

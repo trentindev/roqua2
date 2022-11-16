@@ -18,6 +18,8 @@
   --gray: #636466;
   --gray-dark: #444;
   --max-width: 1200px;
+  --footer-background: #0a3d62;
+  --font-size-small: 14px;
 }
 
 * {
@@ -100,6 +102,13 @@ h5 {
   margin: 20px;
 }
 
+.mr-50 {
+  margin-right: 50px;
+}
+
+
+
+
 /* padding */
 
 .p-5 {
@@ -113,6 +122,18 @@ h5 {
 .p-20 {
   padding: 20px;
 }
+
+.py-20 {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.py-50 {
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+
+
 
 /* general */
 
@@ -183,6 +204,29 @@ header {
   max-width: 150px;
 }
 
+/* footer */
+
+footer {
+  background-color: var(--footer-background);
+  color: var(--color-primary);
+  font-size: var(--font-size-small);
+}
+
+footer a {
+  color:var(--color-primary);
+  text-decoration: none;
+  font-weight: bold;    
+}
+
+.footer-brand {
+  color: var(--primary);
+  font-size: var(--font-size-big);
+}
+
+/* sidebar */
+.sidebar {
+  min-width: 200px;
+}
 
 
 /* Classes de débugage */

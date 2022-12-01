@@ -116,6 +116,7 @@ a {
   margin-right: 50px;
 }
 
+
 .mb-20 {
   margin-bottom: 20px;
 }
@@ -146,6 +147,10 @@ a {
   padding-top: 50px;
   padding-bottom: 50px;
 }
+
+.pb-20 {
+  padding-bottom:20px;
+}
 /* block*/
 .block {
   padding:20px;
@@ -154,6 +159,11 @@ a {
   box-shadow: var(--box-shadow);
 }
 
+.block-shadow:hover {
+  cursor: pointer;
+  box-shadow: none;
+  transition: box-shadow 0.4s;
+}
 
 /* general */
 
@@ -163,6 +173,26 @@ a {
 
 .app-content {
   background-color: var(--gray-light);
+}
+
+.small {
+  font-size: var(--font-size-small);
+  font-family: var(--font-family);
+}
+
+.avatar {
+  width: 25px;
+  border-radius: 50%;
+}
+
+.clickable {
+  color:var(--primary);
+  font-weight: var(--font-weight-semi-bold);
+  cursor: pointer;
+}
+
+.text-small {
+  font-size: var(--font-size-small);
 }
 
 /* Forms */
@@ -192,6 +222,21 @@ a {
 .form-row textarea {
   min-height: 150px;
 }
+
+/* question */
+
+.question-content {
+  border-bottom: 1px solid var(--gray-light);
+}
+
+.rating-up {
+  color: var(--primary);
+}
+
+.rating-down {
+  color: var(--warning);
+}
+
 
 /* sidebar */
 

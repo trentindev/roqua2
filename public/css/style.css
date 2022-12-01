@@ -56,6 +56,11 @@ a {
   text-decoration: none;
 }
 
+small {
+  font-size: var(--font-size-small);
+  font-family: var(--font-family);
+}
+
 /* flex */
 
 .d-flex {
@@ -175,7 +180,7 @@ a {
   background-color: var(--gray-light);
 }
 
-.small {
+small {
   font-size: var(--font-size-small);
   font-family: var(--font-family);
 }

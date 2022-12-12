@@ -42,21 +42,8 @@ class QuestionController extends AbstractController
   }
 
   #[Route('/{id}', name: 'show')]
-  public function show(Request $request, string $id): Response
-  {
-
-    $question =   [ 
-    'id' => '1',
-    'title' => 'Je suis une super question',
-    'content' => 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sit, soluta repellat. Modi, quibusdam eligendi. Natus cupiditate, a accusantium inventore suscipit modi minima recusandae tempora! Modi sit repudiandae accusamus incidunt reprehenderit?',
-    'rating' => 20,
-    'author' => [
-      'name' => 'Paul Aroide',
-      'avatar' => 'https://randomuser.me/api/portraits/men/41.jpg'
-    ],
-    'nbrOfResponse' => 15
-  ];
-
+  public function show(Question $question): Response
+  {    
     return $this->render('question/show.html.twig', [
       'question' => $question,
     ]);

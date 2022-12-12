@@ -348,6 +348,16 @@ footer a {
   min-width: 200px;
 }
 
+/* Flash */
+.flash {
+  padding: 20px;
+  text-align: center;
+  color: #fff;
+}
+
+.flash-success {
+  background-color: var(--success);
+}
 
 /* Classes de débugage */
 .b1{

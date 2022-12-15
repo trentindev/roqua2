@@ -39,6 +39,10 @@ class Question
     #[ORM\Column]
     private ?int $nbrOfResponse = null;
 
+    #[ORM\ManyToOne(inversedBy: 'questions')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $author = null;
+
     public function __construct()
     {
         $this->comments = new ArrayCollection();
@@ -135,6 +139,18 @@ class Question
     public function setNbrOfResponse(int $nbrOfResponse): self
     {
         $this->nbrOfResponse = $nbrOfResponse;
+
+        return $this;
+    }
+
+    public function getAuthor(): ?User
+    {
+        return $this->author;
+    }
+
+    public function setAuthor(?User $author): self
+    {
+        $this->author = $author;
 
         return $this;
     }

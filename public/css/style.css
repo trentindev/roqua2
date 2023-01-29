@@ -122,6 +122,9 @@ small {
   margin-right: 50px;
 }
 
+.mb-10 {
+  margin-bottom: 10px;
+}
 
 .mb-20 {
   margin-bottom: 20px;
@@ -275,16 +278,11 @@ small {
   white-space: pre-wrap;
 }
 
-
-
-
 /* sidebar */
 
 .sidebar {
   min-width: 200px;
 }
-
-/* sidebar */
 
 .sidebar-nav a {
   display: block;
@@ -386,10 +384,8 @@ footer a {
   font-size: var(--font-size-big);
 }
 
-/* sidebar */
-.sidebar {
-  min-width: 200px;
-}
+
+
 
 /* Flash */
 .flash {
@@ -400,6 +396,13 @@ footer a {
 
 .flash-success {
   background-color: var(--success);
+}
+
+/* user profile */
+
+.profile-picture {
+  width: 150px;
+  border-radius: var(--border-radius);
 }
 
 /* Classes de débugage */

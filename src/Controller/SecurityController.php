@@ -16,6 +16,12 @@ use Symfony\Component\Security\Http\Authenticator\FormLoginAuthenticator;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 
+use App\Repository\UserRepository;
+use App\Entity\ResetPassword;
+use App\Repository\ResetPasswordRepository;
+use Symfony\Component\Validator\Constraints\NotBlank;
+
+
 class SecurityController extends AbstractController
 {
 
@@ -67,4 +73,35 @@ class SecurityController extends AbstractController
     public function logout()
     {
     }
+
+    #[Route('/reset-password-request', name: 'reset-password-request')]
+    public function resetPasswordRequest(Request $request, UserRepository $userRepository, ResetPasswordRepository $resetPasswordRepository)
+    {
+      $emailForm = $this->createFormBuilder()->add('email', EmailType::class, [
+        'constraints' => [
+          new NotBlank([
+            'message' => 'Veuillez renseigner votre email'
+          ])
+        ]
+      ])->getForm();
+  
+      $emailForm->handleRequest($request);
+      if ($emailForm->isSubmitted() && $emailForm->isValid()) {
+        $emailValue = $emailForm->get('email')->getData();
+        $user = $userRepository->findOneBy(['email' => $emailValue]);
+        if ($user) {
+          $resetPassword = new ResetPassword();
+          $resetPassword->setUser($user);
+          $resetPassword->setExpireAt(new \DateTimeImmutable('+2 hours'));
+          $token = substr(str_replace(['+', '/', '='], '', base64_encode(random_bytes(30))), 0, 20);
+          $resetPassword->setToken($token);
+        }
+        $this->addFlash('success', 'Un email vous a été envoyé pour réinitialiser votre mot de passe');
+      }
+  
+      return $this->render('security/reset_password_request.html.twig', [
+        'form' => $emailForm->createView()
+      ]);
+    }
+  
 }

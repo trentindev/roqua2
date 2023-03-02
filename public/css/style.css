@@ -398,6 +398,10 @@ footer a {
   background-color: var(--success);
 }
 
+.flash-error {
+  background-color: var(--warning);
+}
+
 /* user profile */
 
 .profile-picture {

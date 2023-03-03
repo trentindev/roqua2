@@ -5,23 +5,33 @@ namespace App\Entity;
 use App\Repository\ResetPasswordRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: ResetPasswordRepository::class)]
+/**
+ * @ORM\Entity(repositoryClass=ResetPasswordRepository::class)
+ */
 class ResetPassword
 {
-    #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column]
-    private ?int $id = null;
+    /**
+     * @ORM\Id
+     * @ORM\GeneratedValue
+     * @ORM\Column(type="integer")
+     */
+    private $id;
 
-    #[ORM\OneToOne(cascade: ['persist'])]// pas de 'remove' car nous ne voulons pas que la suppression d'un token entraîne la suppression de l'utilisateur lié !
-    #[ORM\JoinColumn(nullable: false)]
-    private ?User $user = null;
+    /**
+     * @ORM\OneToOne(targetEntity=User::class, cascade={"persist"})
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $user;
 
-    #[ORM\Column]
-    private ?\DateTimeImmutable $expireAt = null;
+    /**
+     * @ORM\Column(type="datetime_immutable")
+     */
+    private $expiredAt;
 
-    #[ORM\Column(length: 255)]
-    private ?string $token = null;
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $token;
 
     public function getId(): ?int
     {
@@ -40,14 +50,14 @@ class ResetPassword
         return $this;
     }
 
-    public function getExpireAt(): ?\DateTimeImmutable
+    public function getExpiredAt(): ?\DateTimeImmutable
     {
-        return $this->expireAt;
+        return $this->expiredAt;
     }
 
-    public function setExpireAt(\DateTimeImmutable $expireAt): self
+    public function setExpiredAt(\DateTimeImmutable $expiredAt): self
     {
-        $this->expireAt = $expireAt;
+        $this->expiredAt = $expiredAt;
 
         return $this;
     }

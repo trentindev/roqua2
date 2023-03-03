@@ -5,26 +5,38 @@ namespace App\Entity;
 use App\Repository\VoteRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: VoteRepository::class)]
+/**
+ * @ORM\Entity(repositoryClass=VoteRepository::class)
+ */
 class Vote
 {
-    #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column]
-    private ?int $id = null;
+    /**
+     * @ORM\Id
+     * @ORM\GeneratedValue
+     * @ORM\Column(type="integer")
+     */
+    private $id;
 
-    #[ORM\ManyToOne(inversedBy: 'votes')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?User $author = null;
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="votes")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $author;
 
-    #[ORM\ManyToOne(inversedBy: 'votes')]
-    private ?Question $question = null;
+    /**
+     * @ORM\ManyToOne(targetEntity=Question::class, inversedBy="votes")
+     */
+    private $question;
 
-    #[ORM\ManyToOne(inversedBy: 'votes')]
-    private ?Comment $comment = null;
+    /**
+     * @ORM\ManyToOne(targetEntity=Comment::class, inversedBy="votes")
+     */
+    private $comment;
 
-    #[ORM\Column]
-    private ?bool $isLiked = null;
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isLiked;
 
     public function getId(): ?int
     {
@@ -67,7 +79,7 @@ class Vote
         return $this;
     }
 
-    public function isIsLiked(): ?bool
+    public function getIsLiked(): ?bool
     {
         return $this->isLiked;
     }
@@ -77,10 +89,5 @@ class Vote
         $this->isLiked = $isLiked;
 
         return $this;
-    }
-
-    public function getIsLiked(): ?Comment
-    {
-        return $this->isLiked;
     }
 }

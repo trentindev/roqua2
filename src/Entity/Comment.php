@@ -5,39 +5,54 @@ namespace App\Entity;
 use App\Repository\CommentRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
-#[ORM\Entity(repositoryClass: CommentRepository::class)]
+/**
+ * @ORM\Entity(repositoryClass=CommentRepository::class)
+ */
 class Comment
 {
-    #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column]
-    private ?int $id = null;
+    /**
+     * @ORM\Id
+     * @ORM\GeneratedValue
+     * @ORM\Column(type="integer")
+     */
+    private $id;
 
-    #[ORM\ManyToOne(inversedBy: 'comments')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?Question $question = null;
-
-    #[ORM\Column(type: Types::TEXT)]
+    /**
+     * @ORM\Column(type="text")
+     */
     #[Assert\NotBlank(message: 'Veuillez détailler votre réponse')]
-    #[Assert\Length(min: 30, minMessage: 'Votre réponse est trop courte')]
-    private ?string $content = null;
+    #[Assert\Length(min: 100, minMessage: 'Votre réponse est trop courte')]
+    private $content;
 
-    #[ORM\Column]
-    private ?\DateTimeImmutable $createdAt = null;
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $rating;
 
-    #[ORM\Column(type: Types::SMALLINT)]
-    private ?int $rating = null;
+    /**
+     * @ORM\Column(type="datetime_immutable")
+     */
+    private $createdAt;
 
-    #[ORM\ManyToOne(inversedBy: 'comments')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?User $author = null;
+    /**
+     * @ORM\ManyToOne(targetEntity=Question::class, inversedBy="comments")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $question;
 
-    #[ORM\OneToMany(mappedBy: 'comment', targetEntity: Vote::class)]
-    private Collection $votes;
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="comments")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $author;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Vote::class, mappedBy="comment")
+     */
+    private $votes;
 
     public function __construct()
     {
@@ -49,18 +64,6 @@ class Comment
         return $this->id;
     }
 
-    public function getQuestion(): ?Question
-    {
-        return $this->question;
-    }
-
-    public function setQuestion(?Question $question): self
-    {
-        $this->question = $question;
-
-        return $this;
-    }
-
     public function getContent(): ?string
     {
         return $this->content;
@@ -69,6 +72,18 @@ class Comment
     public function setContent(string $content): self
     {
         $this->content = $content;
+
+        return $this;
+    }
+
+    public function getRating(): ?int
+    {
+        return $this->rating;
+    }
+
+    public function setRating(int $rating): self
+    {
+        $this->rating = $rating;
 
         return $this;
     }
@@ -85,14 +100,14 @@ class Comment
         return $this;
     }
 
-    public function getRating(): ?int
+    public function getQuestion(): ?Question
     {
-        return $this->rating;
+        return $this->question;
     }
 
-    public function setRating(int $rating): self
+    public function setQuestion(?Question $question): self
     {
-        $this->rating = $rating;
+        $this->question = $question;
 
         return $this;
     }
@@ -110,7 +125,7 @@ class Comment
     }
 
     /**
-     * @return Collection<int, Vote>
+     * @return Collection|Vote[]
      */
     public function getVotes(): Collection
     {
@@ -120,7 +135,7 @@ class Comment
     public function addVote(Vote $vote): self
     {
         if (!$this->votes->contains($vote)) {
-            $this->votes->add($vote);
+            $this->votes[] = $vote;
             $vote->setComment($this);
         }
 

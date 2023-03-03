@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20230129151730 extends AbstractMigration
+final class Version20210811140930 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -29,9 +29,6 @@ final class Version20230129151730 extends AbstractMigration
     public function down(Schema $schema): void
     {
         // this down() migration is auto-generated, please modify it to your needs
-        $this->addSql('ALTER TABLE vote DROP FOREIGN KEY FK_5A108564F675F31B');
-        $this->addSql('ALTER TABLE vote DROP FOREIGN KEY FK_5A1085641E27F6BF');
-        $this->addSql('ALTER TABLE vote DROP FOREIGN KEY FK_5A108564F8697D13');
         $this->addSql('DROP TABLE vote');
     }
 }

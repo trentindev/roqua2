@@ -2,49 +2,68 @@
 
 namespace App\Entity;
 
-use App\Repository\QuestionRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\QuestionRepository;
 use Symfony\Component\Validator\Constraints as Assert;
 
-#[ORM\Entity(repositoryClass: QuestionRepository::class)]
+/**
+ * @ORM\Entity(repositoryClass=QuestionRepository::class)
+ */
 class Question
 {
-    #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column]
-    private ?int $id = null;
+    /**
+     * @ORM\Id
+     * @ORM\GeneratedValue
+     * @ORM\Column(type="integer")
+     */
+    private $id;
 
-    #[ORM\Column(length: 255)]
-    #[Assert\NotBlank(message:'Veuillez renseigner un titre')]
-    #[Assert\Length(min:10,minMessage:'Veuillez détailler votre titre',max:255,maxMessage:'Le titre de votre message est trop long')]
-    private ?string $title = null;
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    #[Assert\NotBlank(message: 'Veuillez renseigner un titre')]
+    #[Assert\Length(min: 20, minMessage: 'Veuillez détailler votre titre', max: 255, maxMessage: 'Le titre de votre question est trop long')]
+    private $title;
 
-    #[ORM\Column(type: Types::TEXT)]
+    /**
+     * @ORM\Column(type="text")
+     */
     #[Assert\NotBlank(message: 'Veuillez détailler votre question')]
-    #[Assert\Length(min: 50, minMessage: 'Veuillez détailler votre question')]
-    private ?string $content = null;
+    #[Assert\Length(min: 100, minMessage: 'Veuillez détailler votre question')]
+    private $content;
 
-    #[ORM\Column]
-    private ?\DateTimeImmutable $createdAt = null;
+    /**
+     * @ORM\Column(type="datetime_immutable")
+     */
+    private $createdAt;
 
-    #[ORM\Column]
-    private ?int $rating = null;
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $rating;
 
-    #[ORM\OneToMany(mappedBy: 'question', targetEntity: Comment::class)]
-    private Collection $comments;
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $nbrOfResponse;
 
-    #[ORM\Column]
-    private ?int $nbrOfResponse = null;
+    /**
+     * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="question", orphanRemoval=true)
+     */
+    private $comments;
 
-    #[ORM\ManyToOne(inversedBy: 'questions')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?User $author = null;
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="questions")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $author;
 
-    #[ORM\OneToMany(mappedBy: 'question', targetEntity: Vote::class)]
-    private Collection $votes;
+    /**
+     * @ORM\OneToMany(targetEntity=Vote::class, mappedBy="question")
+     */
+    private $votes;
 
     public function __construct()
     {
@@ -105,8 +124,20 @@ class Question
         return $this;
     }
 
+    public function getNbrOfResponse(): ?int
+    {
+        return $this->nbrOfResponse;
+    }
+
+    public function setNbrOfResponse(int $nbrOfResponse): self
+    {
+        $this->nbrOfResponse = $nbrOfResponse;
+
+        return $this;
+    }
+
     /**
-     * @return Collection<int, Comment>
+     * @return Collection|Comment[]
      */
     public function getComments(): Collection
     {
@@ -116,7 +147,7 @@ class Question
     public function addComment(Comment $comment): self
     {
         if (!$this->comments->contains($comment)) {
-            $this->comments->add($comment);
+            $this->comments[] = $comment;
             $comment->setQuestion($this);
         }
 
@@ -135,18 +166,6 @@ class Question
         return $this;
     }
 
-    public function getNbrOfResponse(): ?int
-    {
-        return $this->nbrOfResponse;
-    }
-
-    public function setNbrOfResponse(int $nbrOfResponse): self
-    {
-        $this->nbrOfResponse = $nbrOfResponse;
-
-        return $this;
-    }
-
     public function getAuthor(): ?User
     {
         return $this->author;
@@ -160,7 +179,7 @@ class Question
     }
 
     /**
-     * @return Collection<int, Vote>
+     * @return Collection|Vote[]
      */
     public function getVotes(): Collection
     {
@@ -170,7 +189,7 @@ class Question
     public function addVote(Vote $vote): self
     {
         if (!$this->votes->contains($vote)) {
-            $this->votes->add($vote);
+            $this->votes[] = $vote;
             $vote->setQuestion($this);
         }
 

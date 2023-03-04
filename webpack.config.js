@@ -80,6 +80,7 @@ Encore
 
 // ATTENTION : Il faut utiliser Node <= 16 pour que ça fonctionne
 // non compatible avec Node 17 ou Node 18+ pour le moment
+/*
 Encore.configureDevServerOptions((options) => {
   options.server = {
     type: 'https',
@@ -88,6 +89,17 @@ Encore.configureDevServerOptions((options) => {
     },
   };
   options.allowedHosts = 'all';
+});
+*/
+Encore.configureDevServerOptions((options) => {
+  options.allowedHosts = 'all';
+  options.https = {
+    pfx: path.join(
+      // MOdififier avec le path du certificat de votre machine  
+      process.env.HOME || process.env.USERPROFILE,
+      '.symfony/certs/default.p12'
+    ),
+  };
 });
 
 module.exports = Encore.getWebpackConfig();

@@ -97,7 +97,7 @@ Encore.configureDevServerOptions((options) => {
     pfx: path.join(
       // MOdififier avec le path du certificat de votre machine  
       process.env.HOME || process.env.USERPROFILE,
-      '.symfony/certs/default.p12'
+      '.symfony5/certs/default.p12'
     ),
   };
 });

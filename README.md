@@ -1,6 +1,6 @@
 # roqua2
 BTS SIO symfony project
-# Forker le projet symfony Roqua
+# Cloner le projet symfony Roqua
 
 A partir de cette étape, vous allez développer vos propres fonctionnalités et personnaliser le projet. 
 

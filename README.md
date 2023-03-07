@@ -4,7 +4,12 @@ BTS SIO symfony project
 
 A partir de cette étape, vous allez développer vos propres fonctionnalités et personnaliser le projet. 
 
-Avant de commencer, créer vous un compte mailtrap (procédure présentée en annexe) pour pouvoir simuler l'envoi d'email.
+## Avant de commencer
+- Assurez-vous d'avoir PHP 8.1 minimum
+- Mettez à jour Symfony-cli
+- Dans le php.ini activez les extension 'intl' et 'fileinfo'
+
+Créez vous un compte mailtrap (procédure présentée en annexe) pour pouvoir simuler l'envoi d'email.
 
 ## Procédure du clonage
 

@@ -35,6 +35,7 @@
 	{%- if is_granted('IS_AUTHENTICATED_FULLY') -%}
 		<a href="{{ path('current_user') }}">Profil</a>
 		<a href="{{ path('logout') }}">Déconnexion</a>
+    
 	{% else %}
 		<a href="{{ path('signup') }}" class="btn btn-primary mr-5">Inscription</a>
 		<a href="{{ path('login') }}" class="btn btn-primary-stroke">Connexion</a>

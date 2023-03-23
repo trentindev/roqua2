@@ -72,7 +72,7 @@ Encore
 
   // uncomment if you use React
   //.enableReactPreset()
-  .enableVueLoader();
+  .enableVueLoader()
 
 // uncomment to get integrity="..." attributes on your script & link tags
 // requires WebpackEncoreBundle 1.4 or higher
@@ -81,7 +81,8 @@ Encore
 // ATTENTION : Il faut utiliser Node <= 16 pour que ça fonctionne
 // non compatible avec Node 17 ou Node 18+ pour le moment
 
-Encore.configureDevServerOptions((options) => {
+/*
+.configureDevServerOptions((options) => {
   options.server = {
     type: 'https',
     options: {
@@ -90,6 +91,8 @@ Encore.configureDevServerOptions((options) => {
   };
   options.allowedHosts = 'all';
 });
+*/
+
 /*
 Encore.configureDevServerOptions((options) => {
   options.allowedHosts = 'all';

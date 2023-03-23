@@ -21,8 +21,9 @@ class UserType extends AbstractType
             ->add('firstname', null, ['label' => '*Prénom'])
             ->add('lastname', null, ['label' => '*Nom'])
             ->add('pictureFile', FileType::class, [
-                'label' => '*Image',
-                'required' => $user?->getPicture() ? false : true,
+                'label' => 'Image',
+                //'required' => $user?->getPicture() ? false : true,
+                'required' => false,
                 'mapped' => false,
                 'constraints' => [
                     new Image([

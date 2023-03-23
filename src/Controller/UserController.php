@@ -47,7 +47,7 @@ class UserController extends AbstractController
             $picture = $userForm->get('pictureFile')->getData();
             if ($picture) {
                 $user->setPicture($uploader->uploadProfileImage($picture, $user->getPicture()));
-            }
+            } 
             $em->flush();
             $this->addFlash('success', 'Modifications sauvegardées !');
         }

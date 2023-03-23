@@ -36,7 +36,13 @@ class SecurityController extends AbstractController
         $userForm->handleRequest($request);
         if ($userForm->isSubmitted() && $userForm->isValid()) {
             $picture = $userForm->get('pictureFile')->getData();
-            $user->setPicture($upload->uploadProfileImage($picture));
+            if ($picture) {
+              $user->setPicture($upload->uploadProfileImage($picture));
+            } else 
+            //$user->setPicture("https://randomuser.me/api/portraits/women/42.jpg");
+            $user->setPicture('/build/images/default-avatar-yellow.png');
+            
+
             $hash = $passwordHasher->hashPassword($user, $user->getPassword());
             $user->setPassword($hash);
             $em->persist($user);

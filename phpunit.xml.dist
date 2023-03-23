@@ -39,4 +39,11 @@
         <extension class="Symfony\Component\Panther\ServerExtension" />
     </extensions>
     -->
+
+    <!-- phpunit.xml.dist -->
+    <extensions>
+        <extension class="DAMA\DoctrineTestBundle\PHPUnit\PHPUnitExtension"/>
+    </extensions>
+
+
 </phpunit>
